@@ -10,7 +10,7 @@ resized_image = logo_image.resize((200, 50))  # Especifica las dimensiones desea
 # Mostrar la imagen redimensionada en la barra lateral
 st.sidebar.image(resized_image)
 
-st.title("Actualización de inventario celesa")
+st.title("Actualización de inventario Celesa")
 
 st.write("Cargar archivos CSV:")
 st.set_option('deprecation.showfileUploaderEncoding', False)  # Evita el aviso de codificación
