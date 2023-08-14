@@ -7,6 +7,7 @@ from unidecode import unidecode
 import math
 import json
 import numpy as np
+import io
 
 # Cargar la imagen
 logo_image = Image.open("LOGO_BUKZ.webp")  # Reemplaza con la ruta o nombre de archivo correcto
