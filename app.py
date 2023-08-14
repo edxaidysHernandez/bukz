@@ -78,7 +78,6 @@ if choose == 'Actualización de inventario celesa':
 
 elif choose == 'Creación de productos':
     st.title("Creación de productos")
-    plantilla de creación de productos
     st.write("Plantilla creación de productos")
     st.set_option('deprecation.showfileUploaderEncoding', False)  # Evita el aviso de codificación
 
