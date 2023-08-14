@@ -232,12 +232,18 @@ elif choose == 'Creación de productos':
                 info_placeholder.empty()
                 st.write(df_crear)
 
-                # Botón de descarga sin base64
+                output = io.BytesIO()
+                with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+                    df_crear.to_excel(writer, index=False)
+        
+                # Mostrar el botón de descarga
                 st.download_button(
                     label="Descargar XLSX",
-                    data=df_crear.to_excel(index=False),
+                    data=output.getvalue(),
                     file_name="resultado_crear_productos.xlsx",
-                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                )
+
                 
             except Exception as e:
                 info_placeholder.empty()
