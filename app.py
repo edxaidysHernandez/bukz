@@ -239,9 +239,7 @@ elif choose == 'Creación de productos':
                     label="Descargar XLSX",
                     data=df_crear.to_exce(index=False),
                     file_name="resultado_crear_productos.xlsx",
-                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-"
-                )
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
             except Exception as e:
                 info_placeholder.empty()
                 st.error(f"Error: {str(e)}")
