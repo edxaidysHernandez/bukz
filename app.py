@@ -101,7 +101,7 @@ elif choose == 'Creación de productos':
             info_placeholder = st.empty()
             info_placeholder.info("Cargando...")
 
-            df2 = pd.read_excel(uploaded_file3, sheet_name='Products')
+            df2 = pd.read_excel(uploaded_file3, sheet_name='Products', engine='openpyxl')
 
             try:
                 
