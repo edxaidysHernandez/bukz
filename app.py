@@ -230,7 +230,7 @@ elif choose == 'Creación de productos':
                 df_crear = df
                 
                 info_placeholder.empty()
-                st.write(df_final)
+                st.write(df_crear)
 
                 # Botón de descarga sin base64
                 st.download_button(
