@@ -235,7 +235,7 @@ elif choose == 'Creación de productos':
                 # Botón de descarga sin base64
                 st.download_button(
                     label="Descargar XLSX",
-                    data=df_crear.to_exce(index=False),
+                    data=df_crear.to_excel(index=False),
                     file_name="resultado_crear_productos.xlsx",
                     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 
