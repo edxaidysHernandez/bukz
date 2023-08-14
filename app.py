@@ -95,7 +95,7 @@ elif choose == 'Creación de productos':
     st.write("Cargar archivo XLSX (Fotmato Excel):")
     st.markdown("<h3>Archivo con datos</h3>", unsafe_allow_html=True)
     uploaded_file3 = st.file_uploader("Los nombres de las columnas del archivo debe conservar el mismo nombre de la plantilla de creación de productos", type=["xlsx"], key="archivo_productos")
-     if uploaded_file3 is not None:
+    if uploaded_file3 is not None:
         st.write("Presiona el botón para continuar")
         if st.button("Continuar"):
             info_placeholder = st.empty()
