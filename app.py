@@ -79,7 +79,7 @@ if choose == 'Actualización de inventario celesa':
 
 elif choose == 'Creación de productos':
     st.title("Creación de productos")
-    st.write("Plantilla creación de productos")
+    st.write("<h3>Plantilla creación de productos</h3>")
     st.set_option('deprecation.showfileUploaderEncoding', False)  # Evita el aviso de codificación
 
 # Ruta del archivo local
@@ -239,7 +239,7 @@ elif choose == 'Creación de productos':
         
                 # Mostrar el botón de descarga
                 st.download_button(
-                    label="Descargar XLSX",
+                    label="Descargar archivo xlsx",
                     data=output.getvalue(),
                     file_name="resultado_crear_productos.xlsx",
                     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
