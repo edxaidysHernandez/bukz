@@ -200,7 +200,7 @@ elif choose == 'Creación de productos':
                 df['Variant Weight Unit'] = df['Variant Weight'].apply(lambda x: 'kg' if pd.notnull(x) else np.nan)
                 
                 #Metafield: custom.autor [single_line_text_field]
-                df['Metafield: custom.autor [single_line_text_field]'] =  df2["Autor"].str.title()
+                df['Metafield: custom.autor [single_line_text_field]'] = df2["Autor"].fillna("").str.title()
                 
                 replacements2 = {'Español' : '["Español"]', 'Ingles' : '["Ingles"]', 'Frances' : '["Frances"]', 'Italiano' : '["Italiano"]', 'Portugues' : '["Portugues"]', 
                     'Aleman' : '["Aleman"]', 'Bilingue (Español-Ingles)' : '["Bilingue (Español-Ingles)"]', 'Bilingue (Español-Portugues)' : '["Bilingue (Español-Portugues)"]', 
