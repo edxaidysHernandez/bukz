@@ -57,6 +57,18 @@ if choose == 'Actualización de inventario celesa':
                 df_merged['Stock_Azeta'].fillna(0, inplace=True)
                 df_merged['Stock_Azeta'] = df_merged['Stock_Azeta'].astype(int)
                 df_merged['Inventory Available: Dropshipping [España]'] = df_merged['Inventory Available: Dropshipping [España]'].astype(int)
+
+                non_numeric_rows_stock = df_merged[df_merged['Stock_Azeta'].apply(lambda x: not str(x).isdigit())]
+                non_numeric_rows_inventory = df_merged[df_merged['Inventory Available: Dropshipping [España]'].apply(lambda x: not str(x).isdigit())]
+                
+                # Usar Streamlit para mostrar los datos
+                st.title('Revisión de filas con valores no numéricos')
+                
+                st.header('Filas con valores no numéricos en Stock_Azeta:')
+                st.table(non_numeric_rows_stock)  # o puedes usar st.dataframe(non_numeric_rows_stock)
+                
+                st.header('Filas con valores no numéricos en Inventory Available:')
+                st.table(non_numeric_rows_inventory)
                 
                 comparar_filas = lambda x: 1 if x['Inventory Available: Dropshipping [España]'] == x['Stock_Azeta'] else 0
                 df_merged['Resultado'] = df_merged.apply(comparar_filas, axis=1)
