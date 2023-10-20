@@ -58,6 +58,8 @@ if choose == 'Actualización de inventario celesa':
                 df_merged['Inventory Available: Dropshipping [España]'].fillna(0, inplace=True)
                 df_merged['Stock_Azeta'].fillna(0, inplace=True)
                 df_merged['Stock_Azeta'] = df_merged['Stock_Azeta'].astype(int)
+                df_merged['Inventory Available: Dropshipping [España]'] = pd.to_numeric(df_merged['Inventory Available: Dropshipping [España]'], errors='coerce').fillna(0).astype(int)
+
                 df_merged['Inventory Available: Dropshipping [España]'] = df_merged['Inventory Available: Dropshipping [España]'].astype(int)
 
                 comparar_filas = lambda x: 1 if x['Inventory Available: Dropshipping [España]'] == x['Stock_Azeta'] else 0
