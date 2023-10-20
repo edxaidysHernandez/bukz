@@ -4,4 +4,4 @@ streamlit_option_menu
 unidecode
 openpyxl
 XlsxWriter
-traceback
+
