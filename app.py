@@ -52,6 +52,19 @@ if choose == 'Actualización de inventario celesa':
                 df_products = df_products.loc[df_products['Vendor'] == 'Bukz España']
                 df_products = df_products[['ID', 'Variant ID', 'Vendor', 'Variant SKU', 'Variant Barcode', 'Inventory Available: Dropshipping [España]']]
                 df_products.insert(1, 'Command', 'UPDATE')
+                
+                non_numeric_rows_stock = df_merged[df_merged['Stock_Azeta'].apply(lambda x: not str(x).isdigit())]
+                non_numeric_rows_inventory = df_merged[df_merged['Inventory Available: Dropshipping [España]'].apply(lambda x: not str(x).isdigit())]
+                
+                # Usar Streamlit para mostrar los datos
+                st.title('Revisión de filas con valores no numéricos')
+                
+                st.header('Filas con valores no numéricos en Stock_Azeta:')
+                st.table(non_numeric_rows_stock)  # o puedes usar st.dataframe(non_numeric_rows_stock)
+                
+                st.header('Filas con valores no numéricos en Inventory Available:')
+                st.table(non_numeric_rows_inventory)
+                
                 df_merged = pd.merge(df_products, df_azeta, on="Variant SKU", how='left')
                 df_merged['Inventory Available: Dropshipping [España]'].fillna(0, inplace=True)
                 df_merged['Stock_Azeta'].fillna(0, inplace=True)
