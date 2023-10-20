@@ -234,7 +234,7 @@ elif choose == 'Creación de productos':
                 
                 df['Metafield: custom.ancho [dimension]'] = df2['Ancho'].apply(lambda x: np.nan if np.isnan(x) else json.dumps({"value": x, "unit": "cm"}))
                 
-                df['Metafield: custom.editorial [single_line_text_field]'] = df2['Editorial']
+                df['Metafield: custom.editorial [single_line_text_field]'] = df2['Editorial'].str.title()
                 
                 df['Metafield: custom.numero_de_paginas [number_integer]'] = df2['Numero de paginas']
                 
