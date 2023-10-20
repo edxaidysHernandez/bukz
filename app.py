@@ -8,6 +8,7 @@ import math
 import json
 import numpy as np
 import io
+import traceback
 
 # Cargar la imagen
 logo_image = Image.open("LOGO_BUKZ.webp")  # Reemplaza con la ruta o nombre de archivo correcto
@@ -53,7 +54,12 @@ if choose == 'Actualización de inventario celesa':
                 df_products = df_products[['ID', 'Variant ID', 'Vendor', 'Variant SKU', 'Variant Barcode', 'Inventory Available: Dropshipping [España]']]
                 df_products.insert(1, 'Command', 'UPDATE')
                 
-                
+                df_merged = pd.merge(df_products, df_azeta, on="Variant SKU", how='left')
+                df_merged['Inventory Available: Dropshipping [España]'].fillna(0, inplace=True)
+                df_merged['Stock_Azeta'].fillna(0, inplace=True)
+                df_merged['Stock_Azeta'] = df_merged['Stock_Azeta'].astype(int)
+                df_merged['Inventory Available: Dropshipping [España]'] = df_merged['Inventory Available: Dropshipping [España]'].astype(int)
+
                 comparar_filas = lambda x: 1 if x['Inventory Available: Dropshipping [España]'] == x['Stock_Azeta'] else 0
                 df_merged['Resultado'] = df_merged.apply(comparar_filas, axis=1)
                 df_final = df_merged.loc[df_merged['Resultado'] == 0]
