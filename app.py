@@ -299,7 +299,7 @@ elif choose == 'Corte Proveedores':
                 return zip_buffer.getvalue()
             
             # Carga y procesamiento del archivo
-            df_provedores = pd.read_excel(uploaded_file_provedores, engine='openpyxl')
+            df_provedores = pd.read_excel(uploaded_file_provedores, engine='openpyxl',  dtype={'variant_sku': str})
             files_to_download = {}
             output_directory = 'cortes'
             
