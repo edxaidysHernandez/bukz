@@ -9,6 +9,10 @@ import json
 import numpy as np
 import io
 import traceback
+import os
+import shutil
+from io import BytesIO
+import zipfile
 
 # Cargar la imagen
 logo_image = Image.open("LOGO_BUKZ.webp")  # Reemplaza con la ruta o nombre de archivo correcto
@@ -20,7 +24,7 @@ st.sidebar.image(resized_image)
 
 
 with st.sidebar:
-    choose = option_menu("Menú de opciones", ['Actualización de inventario celesa', 'Creación de productos', 'Actualización de productos'],
+    choose = option_menu("Menú de opciones", ['Actualización de inventario celesa', 'Creación de productos', 'Corte Proveedores'],
     icons=["list check", "database up", "check2 square"], menu_icon="cast", default_index=0,
     styles={ "container": {"padding": "5!important", "background-color": "#fafafa"},
         "icon": { "font-size": "25px"}, 
@@ -266,6 +270,54 @@ elif choose == 'Creación de productos':
         st.info("Por favor, carga el archivo para continuar.")
     
 
-elif choose == 'Actualización de productos':
-    st.title("Actualización de productos")
+elif choose == 'Corte Proveedores':
+    st.title("Corte Proveedores")
     # Resto de tu código para la actualización de productos...
+     
+    st.write("Cargar archivo XLSX (Formato Excel):")
+    st.markdown("<h3>Archivo de ventas</h3>", unsafe_allow_html=True)
+    uploaded_file_provedores = st.file_uploader("El archivo debe tener las columnas: product_title, product_vendor, variant_sku, net_quantity", type=["xlsx"], key="archivo_productos")
+    if uploaded_file_provedores is not None:
+        st.write("Presiona el botón para continuar")
+        if st.button("Continuar"):
+            # Crear el marcador de posición de carga
+            info_placeholder = st.empty()
+            info_placeholder.info("Cargando...")
+            
+            def save_df_to_excel(df, filename):
+                output = BytesIO()
+                with pd.ExcelWriter(output, engine='openpyxl') as writer:
+                    df.to_excel(writer, index=False)
+                processed_data = output.getvalue()
+                return processed_data
+            
+            def create_zip(files, directory):
+                zip_buffer = BytesIO()
+                with zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED) as zip_file:
+                    for file, data in files.items():
+                        zip_file.writestr(f'{directory}/{file}', data)
+                return zip_buffer.getvalue()
+            
+            # Carga y procesamiento del archivo
+            df_provedores = pd.read_excel(uploaded_file_provedores, engine='openpyxl')
+            files_to_download = {}
+            output_directory = 'cortes'
+            
+            for vendor, group in df_provedores.groupby('product_vendor'):
+                # Define el nombre del archivo
+                file_name = f'{vendor}.xlsx'
+                # Guarda el DataFrame del grupo en un BytesIO
+                files_to_download[file_name] = save_df_to_excel(group, file_name)
+            
+            # Si hay archivos para descargar, crea un ZIP
+            if files_to_download:
+                zip_to_download = create_zip(files_to_download, output_directory)
+                st.download_button(
+                    label="Descargar corte de proveedores",
+                    data=zip_to_download,
+                    file_name="cortes_proveedores.zip",
+                    mime="application/zip"
+                )
+                # Elimina el marcador de posición de carga una vez que el botón de descarga está listo
+                info_placeholder.empty()
+
