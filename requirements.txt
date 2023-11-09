@@ -4,4 +4,8 @@ streamlit_option_menu
 unidecode
 openpyxl
 XlsxWriter
-
+shutil
+os
+BytesIO
+zipfile
+io
