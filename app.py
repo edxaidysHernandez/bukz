@@ -34,7 +34,7 @@ with st.sidebar:
 if choose == 'Actualización de inventario celesa':
     st.title("Actualización de inventario celesa")
     st.write("Cargar archivos CSV:")
-    st.set_option('deprecation.showfileUploaderEncoding', False)  # Evita el aviso de codificación
+    #st.set_option('deprecation.showfileUploaderEncoding', False)  # Evita el aviso de codificación
 
     st.markdown("<h3>Archivo Productos</h3>", unsafe_allow_html=True)
     uploaded_file1 = st.file_uploader("El archivo de producto debe tener las columnas: ID,  Variant ID,  Vendor,  Variant SKU,  Variant Barcode,  Inventory Available Dropshipping [España]", type=["csv"], key="archivo_productos")
@@ -97,7 +97,8 @@ if choose == 'Actualización de inventario celesa':
 elif choose == 'Creación de productos':
     st.title("Creación de productos")
     st.markdown("<h3>Plantilla creación de productos</h3>", unsafe_allow_html=True)
-    st.set_option('deprecation.showfileUploaderEncoding', False)  # Evita el aviso de codificación
+   
+    #st.set_option('deprecation.showfileUploaderEncoding', False)  # Evita el aviso de codificación
 
 # Ruta del archivo local
     file_path = "plantilla_creacion_productos.xlsx"
